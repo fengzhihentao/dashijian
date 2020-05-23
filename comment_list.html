@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>评论列表</title>
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="./libs/jquery-1.12.4.min.js"></script>
+    <script src="./libs/template-web.js"></script>
+    <script src="./libs/http.js"></script>
+    <script src="./libs/bootstrappaginator/bootstrap-paginator.min.js"></script>
+    <script src="./js/comment_list.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="common_title">
+            评论列表
+        </div>
+        <div class="container-fluid common_con">
+            <table class="table table-striped table-bordered table-hover mp20">
+                <thead>
+                    <tr>
+                        <th width='100px'>作者</th>
+                        <th>评论</th>
+                        <th>评论在</th>
+                        <th width='100px'>提交于</th>
+                        <th width='100px'>状态</th>
+                        <th class="text-center" width="100">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="row text-center">
+                <ul id="pagination" class="pagination-sm"></ul>
+            </div>
+
+        </div>
+    </div>
+    <!-- 评论列表模板 -->
+    <script type='text/template' id='commentTemp'>
+        {{each data}}
+        <tr>
+            <td>{{$value.author}}</td>
+            <td>{{$value.content}}</td>
+            <td>{{$value.title}}</td>
+            <td>{{$value.date}}</td>
+            <td>{{$value.state}}</td>
+            <td class="text-center">
+                {{if $value.state=='待审核'}}
+                <a href="javascript:void(0);" data-id='{{$value.id}}' class="btn btn-success btn-xs btnAccept">批准</a> {{else if $value.state == '已通过'}}
+                <a href="javascript:void(0);" data-id='{{$value.id}}' class="btn btn-warning btn-xs btnReject">拒绝</a> {{/if}}
+                <a href="javascript:void(0);" data-id='{{$value.id}}' class="btn btn-danger btn-xs btnDelete">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+</body>
+
+</html>
